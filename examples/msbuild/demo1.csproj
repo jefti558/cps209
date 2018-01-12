@@ -1,0 +1,13 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">  
+
+  <Target Name="Build">  
+    <!-- Invoke csc compiler -->
+    <MakeDir Directories="bin"/>
+    <Csc Sources="Demo1.cs" EmitDebugInformation="true" OutputAssembly="bin\Demo1.exe"/>
+  </Target>
+
+  <Target Name="Clean">  
+    <!-- Remove generated files. Execute using command: msbuild /target:Clean -->
+    <RemoveDir Directories="bin" />  
+  </Target>  
+</Project>  

@@ -1,0 +1,29 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build;AfterBuild">  
+  <ItemGroup>
+    <!-- List library DLL's used by the code here -->
+    <Reference Include="C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\PublicAssemblies\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll" />
+  </ItemGroup>
+
+  <ItemGroup>  
+    <!-- List source files here -->
+    <Compile Include="Calc.cs" />  
+    <Compile Include="Calculator.cs" />  
+    <Compile Include="CalculatorTest.cs" />  
+  </ItemGroup>  
+
+  <Target Name="Build">  
+    <!-- Invoke csc compiler -->
+    <MakeDir Directories="bin"/>
+    <Csc Sources="@(Compile)" EmitDebugInformation="true" References="@(Reference)" OutputAssembly="bin\Calc.exe"/>
+  </Target>
+
+  <Target Name="AfterBuild">  
+    <!-- Run unit test -->
+    <Exec Command="MSTest.exe /testcontainer:bin\Calc.exe /detail:errorstacktrace /detail:stdout" />
+  </Target>
+
+  <Target Name="Clean">  
+    <!-- Remove generated files. Execute using command: msbuild /target:Clean -->
+    <RemoveDir Directories="bin;TestResults" />  
+  </Target>  
+</Project>  
